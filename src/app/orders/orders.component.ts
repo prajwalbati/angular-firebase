@@ -36,6 +36,15 @@ export class OrdersComponent implements OnInit {
 
   onSubmit() {
     console.log("Submit");
+
+    this.form.value.coffeeOrder = this.coffeeOrder;
+    let data = this.form.value;
+    this.ordersService.createCoffeeOrder(data)
+         .then(res => {
+          console.log(res);
+             /*do something here....
+             maybe clear the form or give a success message*/
+         });
   }
 
 }
