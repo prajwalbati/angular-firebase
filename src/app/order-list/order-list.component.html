@@ -1,25 +1,28 @@
-<table class="table table-stripe">
-  <thead>
-    <tr>
-      <th>Order Number</th>
-      <th>Customer Name</th>
-      <th>Order Items</th>
-      <th>Action</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let order of coffeeOrders">
-       <td>{{ order.payload.doc.data().orderNumber }}</td>
-       <td>{{ order.payload.doc.data().customerName }}</td>
-       <td>
-        <span *ngFor="let coffee of order.payload.doc.data().coffeeOrder">
-           {{ coffee }}
-        </span>
-       </td>
-       <td>
-        <a href="#" [hidden]="order.payload.doc.data().completed"><i class="material-icons" (click)="markCompleted(order)">check</i></a>
-        <a href="#" [hidden]="order.payload.doc.data().completed"><i class="material-icons" (click)="deleteOrder(order)">delete_forever</i></a>
-      </td>
-    </tr>
-    </tbody>
-</table>
+<div class="orderTable">
+  <h4>Orders List</h4>
+  <table class="table table-stripe">
+    <thead>
+      <tr>
+        <th>Order Number</th>
+        <th>Customer Name</th>
+        <th>Order Items</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of coffeeOrders">
+         <td>{{ order.payload.doc.data().orderNumber }}</td>
+         <td>{{ order.payload.doc.data().customerName }}</td>
+         <td>
+          <span *ngFor="let coffee of order.payload.doc.data().coffeeOrder">
+             {{ coffee }}
+          </span>
+         </td>
+         <td>
+          <a href="#" [hidden]="order.payload.doc.data().completed"><i class="material-icons" (click)="markCompleted(order)">check</i></a>
+          <a href="#" [hidden]="order.payload.doc.data().completed"><i class="material-icons" (click)="deleteOrder(order)">delete_forever</i></a>
+        </td>
+      </tr>
+      </tbody>
+  </table>
+</div>

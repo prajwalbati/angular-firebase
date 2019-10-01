@@ -1,22 +1,39 @@
-<form [formGroup]="form">
-  <input placeholder="Order Number" formControlName="orderNumber" type="text" class="input-field col s12">
-  <input placeholder="Customer Name" formControlName="customerName" type="text" class="input-field col s12">
-</form>
+<div class="orderForm">
+  <h4>Order Form</h4>
+  <form [formGroup]="form">
+    <div class="row">
+      <div class="input-field col s6">
+        <input id="orderNumber" type="text" formControlName="orderNumber" class="validate">
+        <label for="orderNumber">Order Number</label>
+      </div>
+      <div class="input-field col s6">
+        <input id="customerName" type="text" formControlName="customerName" class="validate">
+        <label for="customerName">Customer Name</label>
+      </div>
+    </div>
+  </form>
 
-<button class="waves-effect waves-light btn col s4"
-        *ngFor="let coffee of coffees"
-        (click)="addCoffee(coffee)">
-{{coffee}}
-</button>
-<ul class="collection">
-    <li *ngFor="let coffee of coffeeOrder">
-        <span class="col s11"> {{ coffee }} </span>
-        <a class="col s1" (click)="removeCoffee(coffee)">x</a>
-    </li>
-</ul>
+  <div class="coffeeList row">
+    <div class="col s4" *ngFor="let coffee of coffees">
+      <button class="waves-effect waves-light btn grey {{isCoffeeSelected(coffee)?'selected':''}}" (click)="addCoffee(coffee)">
+      {{coffee}}
+      </button>
+    </div>
+  </div>
+  <!-- <ul class="collection">
+      <li *ngFor="let coffee of coffeeOrder">
+          <span class="col s11"> {{ coffee }} </span>
+          <a class="col s1" (click)="removeCoffee(coffee)">x</a>
+      </li>
+  </ul> -->
 
-  <button
-       class="waves-effect waves-light btn col s12"
-       (click)="onSubmit()">
-  Submit
-  </button>
+  <div class="errorMessage" *ngIf="hasMessage">
+    <div class="green lighten-1 card-panel" *ngFor="let message of errors">{{message}}</div>
+  </div>
+  <div class="errorMessage" *ngIf="hasError">
+    <div class="red lighten-3 card-panel" *ngFor="let error of errors">{{error}}</div>
+  </div>
+
+  <button class="waves-effect waves-light btn submitBtn" (click)="onSubmit()">Submit</button>
+</div>
+
