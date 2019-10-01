@@ -5,7 +5,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { AngularFireModule } from "@angular/fire";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
 
-import { environment } from "../environments/environment";
+import { environment } from "../environments/environment.prod";
 import { AppRoutingModule } from './app-routing.module';
 
 import { OrdersService } from "./shared/orders.service";

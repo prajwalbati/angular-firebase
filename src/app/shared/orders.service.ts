@@ -13,7 +13,7 @@ export class OrdersService {
         this.firestore
             .collection("coffeeOrders")
             .add(data)
-            .then(res => {}, err => reject(err));
+            .then(res => resolve(res), err => reject(err));
     });
   }
 

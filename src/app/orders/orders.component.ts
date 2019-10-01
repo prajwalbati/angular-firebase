@@ -24,27 +24,62 @@ export class OrdersComponent implements OnInit {
 
   coffeeOrder = [];
 
+  hasError: boolean = false;
+  errors: any = [];
+  hasMessage: boolean = false;
+
   ngOnInit() {
   }
 
-  addCoffee = coffee => this.coffeeOrder.push(coffee);
+  addCoffee = coffee => {
+    let index = this.coffeeOrder.indexOf(coffee);
+    if (index===-1)
+      this.coffeeOrder.push(coffee);
+    else
+      this.coffeeOrder.splice(index, 1);
+  }
 
-  removeCoffee = coffee => {
-      let index = this.coffeeOrder.indexOf(coffee);
-      if (index > -1) this.coffeeOrder.splice(index, 1);
-  };
+  isCoffeeSelected = coffee => {
+    let index = this.coffeeOrder.indexOf(coffee);
+    return index!==-1;
+  }
+
+  // removeCoffee = coffee => {
+  //     let index = this.coffeeOrder.indexOf(coffee);
+  //     if (index > -1) this.coffeeOrder.splice(index, 1);
+  // };
 
   onSubmit() {
-    console.log("Submit");
+    this.errors = [];
+    this.hasError = false;
+    this.hasMessage = false;
 
     this.form.value.coffeeOrder = this.coffeeOrder;
     let data = this.form.value;
-    this.ordersService.createCoffeeOrder(data)
-         .then(res => {
-          console.log(res);
-             /*do something here....
-             maybe clear the form or give a success message*/
-         });
+    if (!data.orderNumber) {
+      this.errors.push("Please add order number");
+    }
+    if (!data.customerName) {
+      this.errors.push("Please add customer name");
+    }
+    if (data.coffeeOrder.length==0) {
+      this.errors.push("Please select orders");
+    }
+    if (this.errors.length > 0) {
+      this.hasError = true;
+      return;
+    }
+
+    this.ordersService.createCoffeeOrder(data).then(res => {
+      this.hasMessage = true;
+      this.errors = ["Order submitted successfully"];
+      this.resetForm();
+     });
+  }
+
+  resetForm() {
+    this.form.reset();
+    this.coffeeOrder = [];
   }
 
 }
