@@ -1,8 +1,7 @@
-declare var require: any;
-const data = require('../../env.json');
+import data from '../../env.json';
 
 export const environment = {
-    production: true,
+    production: false,
     firebaseConfig: data.firebaseConfig
 };
 
