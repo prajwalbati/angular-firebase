@@ -1,7 +1,7 @@
 import data from '../../env.json';
 
 export const environment = {
-    production: false,
+    production: true,
     firebaseConfig: data.firebaseConfig
 };
 
