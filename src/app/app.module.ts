@@ -14,6 +14,8 @@ import { AppComponent } from './app.component';
 import { OrdersComponent } from './orders/orders.component';
 import { OrderListComponent } from './order-list/order-list.component';
 
+import data from '../../env.json';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +26,7 @@ import { OrderListComponent } from './order-list/order-list.component';
     BrowserModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireModule.initializeApp(data.firebaseConfig),
     AngularFirestoreModule
   ],
   providers: [OrdersService],

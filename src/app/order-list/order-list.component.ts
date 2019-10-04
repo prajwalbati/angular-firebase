@@ -8,7 +8,7 @@ import { OrdersService } from "../shared/orders.service";
   styleUrls: ['./order-list.component.scss']
 })
 export class OrderListComponent implements OnInit {
-  coffeeOrders: any;
+  coffeeOrders: any = [];
 
   constructor(
     private ordersService:OrdersService
@@ -21,7 +21,6 @@ export class OrderListComponent implements OnInit {
   getCoffeeOrders = () =>
     this.ordersService.getCoffeeOrders().subscribe(res => {
       this.coffeeOrders = res;
-      console.log(res);
     });
 
   markCompleted = (data) => this.ordersService.updateCoffeeOrder(data);

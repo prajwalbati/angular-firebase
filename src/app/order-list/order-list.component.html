@@ -23,6 +23,9 @@
           <a href="#" [hidden]="order.payload.doc.data().completed"><i class="material-icons" (click)="deleteOrder(order)">delete_forever</i></a>
         </td>
       </tr>
-      </tbody>
+      <tr *ngIf="coffeeOrders.length==0">
+        <td colspan="4">No orders yet</td>
+      </tr>
+    </tbody>
   </table>
 </div>
