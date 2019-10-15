@@ -24,14 +24,14 @@ export class OrdersService {
   updateCoffeeOrder(data) {
     return this.firestore
        .collection("coffeeOrders")
-       .doc(data.payload.doc.id)
-       .set({ completed: true }, { merge: true });
+       .doc(data.id)
+       .set({ isCompleted: true }, { merge: true });
   }
 
   deleteCoffeeOrder(data) {
     return this.firestore
        .collection("coffeeOrders")
-       .doc(data.payload.doc.id)
+       .doc(data.id)
        .delete();
   }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { orderBy } from 'lodash';
 
 import { OrdersService } from "../shared/orders.service";
 
@@ -20,7 +21,12 @@ export class OrderListComponent implements OnInit {
 
   getCoffeeOrders = () =>
     this.ordersService.getCoffeeOrders().subscribe(res => {
-      this.coffeeOrders = res;
+      let coffeeOrdersData = res.map(coffeeData => {
+        let customData = coffeeData.payload.doc.data();
+        customData["id"] = coffeeData.payload.doc.id;
+        return customData;
+      });
+      this.coffeeOrders = orderBy(coffeeOrdersData, ['orderedDate'], ['desc']);
     });
 
   markCompleted = (data) => this.ordersService.updateCoffeeOrder(data);

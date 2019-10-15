@@ -18,7 +18,7 @@ export class OrdersComponent implements OnInit {
     customerName: new FormControl(''),
     orderNumber: new FormControl(''),
     coffeeOrder: new FormControl(''),
-    completed: new FormControl(false)
+    isCompleted: new FormControl(false)
   });
   coffees = ["Americano", "Flat White", "Cappuccino", "Latte", "Espresso", "Machiato", "Mocha", "Hot Chocolate", "Tea"];
 
@@ -69,6 +69,7 @@ export class OrdersComponent implements OnInit {
       this.hasError = true;
       return;
     }
+    data["orderedDate"] = new Date().getTime();
 
     this.ordersService.createCoffeeOrder(data).then(res => {
       this.hasMessage = true;

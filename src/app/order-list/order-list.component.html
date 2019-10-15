@@ -3,28 +3,32 @@
   <table class="table table-stripe">
     <thead>
       <tr>
-        <th>Order Number</th>
+        <th>Ordered Date</th>
+        <th>Order No</th>
         <th>Customer Name</th>
         <th>Order Items</th>
+        <th>Status</th>
         <th>Action</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let order of coffeeOrders">
-         <td>{{ order.payload.doc.data().orderNumber }}</td>
-         <td>{{ order.payload.doc.data().customerName }}</td>
+         <td>{{ order.orderedDate | date:'medium' }}</td>
+         <td>{{ order.orderNumber }}</td>
+         <td>{{ order.customerName }}</td>
          <td>
-          <span *ngFor="let coffee of order.payload.doc.data().coffeeOrder">
-             {{ coffee }}
+          <span *ngFor="let coffee of order.coffeeOrder">
+             {{ coffee }},
           </span>
          </td>
+         <td><span>{{order.isCompleted ? "Completed" : "Pending"}}</span></td>
          <td>
-          <a href="#" [hidden]="order.payload.doc.data().completed"><i class="material-icons" (click)="markCompleted(order)">check</i></a>
-          <a href="#" [hidden]="order.payload.doc.data().completed"><i class="material-icons" (click)="deleteOrder(order)">delete_forever</i></a>
+          <a href="#" title="Order Delivered" [hidden]="order.isCompleted"><i class="material-icons" (click)="markCompleted(order)">check</i></a>
+          <a href="#" title="Delete Order" class="text-lighten-2 red-text"><i class="material-icons" (click)="deleteOrder(order)">delete_forever</i></a>
         </td>
       </tr>
       <tr *ngIf="coffeeOrders.length==0">
-        <td colspan="4">No orders yet</td>
+        <td colspan="6">No orders yet</td>
       </tr>
     </tbody>
   </table>

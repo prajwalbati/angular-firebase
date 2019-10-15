@@ -28,10 +28,10 @@
   </ul> -->
 
   <div class="errorMessage" *ngIf="hasMessage">
-    <div class="green lighten-1 card-panel" *ngFor="let message of errors">{{message}}</div>
+    <div class="green lighten-1 card-panel white-text" *ngFor="let message of errors">{{message}}</div>
   </div>
   <div class="errorMessage" *ngIf="hasError">
-    <div class="red lighten-3 card-panel" *ngFor="let error of errors">{{error}}</div>
+    <div class="red lighten-3 card-panel white-text" *ngFor="let error of errors">{{error}}</div>
   </div>
 
   <button class="waves-effect waves-light btn submitBtn" (click)="onSubmit()">Submit</button>
